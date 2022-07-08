@@ -1,0 +1,19 @@
+name: See if `cd` has any forward effect
+
+on:
+  push
+
+jobs:
+  cd-forward:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          mkdir inside
+          echo "ok, cwd is carried over between steps" > inside/stuff
+          echo "or it's not" > stuff
+          cd inside
+      - run: |
+          ls
+          cat stuff
